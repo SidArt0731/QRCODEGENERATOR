@@ -1,0 +1,75 @@
+<Function>:
+	Screen:
+		name : "first"
+		
+		MDToolbar:
+			title : "QR code generator"
+			font_style : "H5"
+			pos_hint : {"top" : 1}
+			elevation : 9
+			left_action_items: [['information', lambda x: app.show_data(object)]]
+			right_action_items: [['settings', lambda x: app.show_themepicker()]]
+		
+		BoxLayout:
+			size_hint_y : .1
+			padding : "10dp"
+			pos_hint : {"center_y" : .75}
+			
+			MDTextField:
+				id : link_text
+				hint_text : "Enter any URL,text etc. to generate a QR code"
+				helper_text:'text,url,code or anything'
+				helper_text_mode:'on_focus'
+				mode : "fill"
+				fill_color: 0, 0, 0, .05
+				required : True
+		
+		BoxLayout:
+			size_hint_y : .1
+			padding : "10dp"
+			pos_hint : {"center_y" : .60}
+			
+			MDTextField:
+				id : image_name
+				hint_text : "Enter image name to save the QR code"
+				helper_text:'enter name of image to save'
+				helper_text_mode:'on_focus'
+				mode : "fill"
+				fill_color: 0, 0, 0, .05
+				required : True
+		
+		MDFillRoundFlatIconButton:
+			icon : "qrcode"
+			text : "generate"
+			pos_hint : {"center_x" : .25 , "center_y" : .1}
+			on_release : root.generate_qr_code(root)
+		
+		MDFillRoundFlatIconButton:
+			icon : "eye"
+			text : "view image"
+			pos_hint : {"center_x" : .75 , "center_y" : .1}
+			on_release : root.view_image(root)
+			
+	Screen:
+		name : "image"
+		
+		BoxLayout:
+			size_hint_y : .6
+			padding : "10dp"
+			pos_hint : {"center_y" : .5}
+			
+			Image:
+				id : img_
+				
+		MDLabel:
+			text : "QR Code"
+			font_style : "H4"
+			pos_hint : {"center_y" : .9}
+			halign : "center"
+		
+		MDFloatingActionButton:
+			icon : "plus"
+			#text : "make another"
+			pos_hint : {"center_x" : .5 , "center_y" : .1}
+			on_release : root.make_another(root)
+			
